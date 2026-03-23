@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IA Ética e Aplicada — PPGCO/UFRN 2026.1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --preto:   #10181F;
+      --azul:    #174195;
+      --vermelho:#E2231A;
+      --cinza:   #CAC9C8;
+      --escuro:  #2C3E50;
+      --claro:   #E8E8E8;
+      --fundo:   #F7F7FA;
+      --branco:  #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--fundo);
+      color: var(--escuro);
+      line-height: 1.6;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--preto);
+      color: var(--claro);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(23,65,149,.35) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 10% 90%, rgba(226,35,26,.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 32px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(23,65,149,.4);
+      border: 1px solid rgba(23,65,149,.7);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #9BBFFF;
+      margin-bottom: 28px;
+    }
+
+    .badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #E2231A;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .5; transform: scale(1.4); }
+    }
+
+    .hero h1 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      max-width: 820px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span { color: #E2231A; }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--cinza);
+      max-width: 640px;
+      margin-bottom: 44px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .meta-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 14px;
+      padding: 18px 24px;
+      min-width: 160px;
+    }
+
+    .meta-card .label {
+      font-size: .72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #9BBFFF;
+      margin-bottom: 4px;
+    }
+
+    .meta-card .value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--branco);
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--preto);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav ul {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      list-style: none;
+      gap: 0;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 18px 20px;
+      color: var(--cinza);
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+
+    nav ul li a:hover { color: var(--branco); }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 32px; }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--vermelho);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--escuro);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .section-lead {
+      font-size: 1.05rem;
+      color: #5a6b7e;
+      max-width: 680px;
+      margin-bottom: 48px;
+    }
+
+    /* ── SOBRE ── */
+    #sobre { background: var(--branco); }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .sobre-grid { grid-template-columns: 1fr; }
+    }
+
+    .sobre-text p {
+      color: #5a6b7e;
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    .pilares {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .pilar {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px;
+      background: var(--fundo);
+      border-radius: 14px;
+      border-left: 4px solid var(--azul);
+    }
+
+    .pilar-icon {
+      font-size: 1.5rem;
+      min-width: 36px;
+    }
+
+    .pilar h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--escuro);
+      margin-bottom: 4px;
+    }
+
+    .pilar p {
+      font-size: .85rem;
+      color: #6b7a8d;
+    }
+
+    /* ── MÓDULOS ── */
+    #modulos { background: var(--fundo); }
+
+    .modulos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .modulo-card {
+      background: var(--branco);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid #e2e8f0;
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modulo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.08);
+    }
+
+    .modulo-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--azul);
+    }
+
+    .modulo-num {
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--azul);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+    }
+
+    .modulo-data {
+      font-size: .78rem;
+      color: #94a3b8;
+      margin-bottom: 10px;
+    }
+
+    .modulo-card h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--escuro);
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .modulo-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: .7rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: #EEF2FF;
+      color: var(--azul);
+    }
+
+    .tag.red { background: #FEF2F2; color: var(--vermelho); }
+
+    /* ── EQUIPE ── */
+    #equipe { background: var(--branco); }
+
+    .equipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .pessoa-card {
+      background: var(--fundo);
+      border-radius: 16px;
+      padding: 32px 28px;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+    }
+
+    .avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--azul);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 auto 16px;
+    }
+
+    .pessoa-card .cargo {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--vermelho);
+      margin-bottom: 6px;
+    }
+
+    .pessoa-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--escuro);
+      margin-bottom: 6px;
+    }
+
+    .pessoa-card p {
+      font-size: .84rem;
+      color: #6b7a8d;
+    }
+
+    /* ── NUMEROS ── */
+    #numeros { background: var(--azul); color: var(--branco); }
+
+    .numeros-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 32px;
+      text-align: center;
+    }
+
+    .numero-item .valor {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--branco);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .numero-item .valor span { color: #E2231A; }
+
+    .numero-item .descricao {
+      font-size: .9rem;
+      color: rgba(255,255,255,.7);
+      font-weight: 500;
+    }
+
+    /* ── INSCRICAO ── */
+    #inscricao { background: var(--preto); color: var(--claro); text-align: center; }
+
+    #inscricao .section-title { color: var(--branco); }
+    #inscricao .section-lead  { color: var(--cinza); margin-left: auto; margin-right: auto; }
+
+    .info-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      padding: 14px 24px;
+      font-size: .9rem;
+      color: var(--cinza);
+      margin-top: 8px;
+    }
+
+    .info-box strong { color: var(--branco); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a1018;
+      color: rgba(255,255,255,.4);
+      text-align: center;
+      padding: 32px;
+      font-size: .82rem;
+    }
+
+    footer strong { color: rgba(255,255,255,.7); }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Curso de Extensão · PPGCO/UFRN · 2026.1
+    </div>
+    <h1>Da Teoria à Prática:<br><span>Inteligência Artificial Ética</span><br>e Aplicada ao Contexto Acadêmico</h1>
+    <p class="hero-sub">Capacitação em uso ético, crítico e prático de ferramentas de IA para pesquisa e produção acadêmica. 11 encontros presenciais, 48 horas totais.</p>
+    <div class="hero-meta">
+      <div class="meta-card">
+        <div class="label">Início</div>
+        <div class="value">13 abr 2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Término</div>
+        <div class="value">29 jun 2026</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Carga Horária</div>
+        <div class="value">48 horas</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Vagas</div>
+        <div class="value">40 participantes</div>
+      </div>
+      <div class="meta-card">
+        <div class="label">Horário</div>
+        <div class="value">Seg · 18h30</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav>
+  <ul>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#modulos">Módulos</a></li>
+    <li><a href="#equipe">Equipe</a></li>
+    <li><a href="#numeros">Números</a></li>
+    <li><a href="#inscricao">Inscrições</a></li>
+  </ul>
+</nav>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="container">
+    <div class="section-label">Sobre o Curso</div>
+    <div class="section-title">Letramento em IA para a Academia</div>
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <p>Este curso de extensão capacita discentes e docentes de graduação e pós-graduação no uso ético, crítico e prático de ferramentas de Inteligência Artificial aplicadas à pesquisa e à produção acadêmica.</p>
+        <p>Fundamentado no <em>AI Competency Framework for Teachers</em> da UNESCO (2024) e nas diretrizes éticas de Porsdam Mann et al. (2024), o programa articula três eixos centrais: compreensão dos fundamentos técnicos, análise crítica das implicações éticas e aplicação prática em tarefas acadêmicas reais.</p>
+        <p>A proposta evolui da edição 2025.2, dedicando-se integralmente à formação em IA com maior profundidade prática e cobertura de ferramentas diversificadas — de interfaces web a ferramentas CLI e ambientes integrados de gestão do conhecimento.</p>
+      </div>
+      <div class="pilares">
+        <div class="pilar">
+          <div class="pilar-icon">🧠</div>
+          <div>
+            <h4>Fundamentos Técnicos</h4>
+            <p>LLMs, arquitetura Transformer, tokenização, alucinações e vieses algorítmicos.</p>
+          </div>
+        </div>
+        <div class="pilar">
+          <div class="pilar-icon">⚖️</div>
+          <div>
+            <h4>Ética e Regulação</h4>
+            <p>Diretrizes UNESCO, MEC/CNE, CNPq, COPE e principais editoras científicas.</p>
+          </div>
+        </div>
+        <div class="pilar">
+          <div class="pilar-icon">🛠️</div>
+          <div>
+            <h4>Prática Intensiva</h4>
+            <p>60% da carga presencial em hands-on: web, CLI e Obsidian aplicados à pesquisa real.</p>
+          </div>
+        </div>
+        <div class="pilar">
+          <div class="pilar-icon">📂</div>
+          <div>
+            <h4>Projeto Integrador</h4>
+            <p>Cada participante desenvolve seu próprio fluxo de trabalho com IA ao longo do curso.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section id="modulos">
+  <div class="container">
+    <div class="section-label">Conteúdo Programático</div>
+    <div class="section-title">11 Encontros Presenciais</div>
+    <p class="section-lead">Todos às segundas-feiras, das 18h30 às 20h30, no Departamento de Odontologia da UFRN — Natal/RN.</p>
+    <div class="modulos-grid">
+
+      <div class="modulo-card">
+        <div class="modulo-num">Encontro 1</div>
+        <div class="modulo-data">13/04/2026</div>
+        <h3>Fundamentos de IA e LLMs</h3>
+        <div class="modulo-tags">
+          <span class="tag">Transformer</span>
+          <span class="tag">Tokenização</span>
+          <span class="tag">Alucinações</span>
+        </div>
+      </div>
+
+      <div class="modulo-card">
+        <div class="modulo-num">Encontro 2</div>
+        <div class="modulo-data">27/04/2026</div>
+        <h3>Panorama de LLMs e Ferramentas Acadêmicas</h3>
+        <div class="modulo-tags">
+          <span class="tag">ChatGPT</span>
+          <span class="tag">Claude</span>
+          <span class="tag">Elicit</span>
+          <span class="tag">Consensus</span>
+        </div>
+      </div>
+
+      <div class="modulo-card">
+        <div class="modulo-num">Encontro 3</div>
+        <div class="modulo-data">04/05/2026</div>
+        <h3>Ética e Uso Responsável — Parte 1</h3>
+        <div class="modulo-tags">
+          <span class="tag red">UNESCO</span>
+          <span class="tag red">MEC/CNE</span>
+          <span class="tag red">CNPq</span>
+        </div>
+      </div>
+
+      <div class="modulo-card">
+        <div class="modulo-num">Encontro 4</div>
+        <div class="modulo-data">11/05/2026</div>
+        <h3>Ética e Uso Responsável — Parte 2</h3>
+        <div class="modulo-tags">
+          <span class="tag red">Autoria</span>
+          <span class="tag red">ICMJE</span>
+          <span class="tag red">Estudos de Caso</span>
+        </div>
+      </div>
+
+      <div class="modulo-card">
+        <div class="modulo-num">Encontro 5</div>
+        <div class="modulo-data">18/05/2026</div>
+        <h3>Engenharia de Prompt para Pesquisa</h3>
+        <div class="modulo-tags">
+          <span class="tag">Zero-shot</span>
+          <span class="tag">Few-shot</span>
+          <span class="tag">Chain-of-thought</span>
+        </div>
+      </div>
+
+      <div class="modulo-card">
+        <div class="modulo-num">Encontro 6</div>
+        <div class="modulo-data">25/05/2026</div>
+        <h3>Prática: Ferramentas Web</h3>
+        <div class="modulo-tags">
+          <span class="tag">NotebookLM</span>
+          <span class="tag">Napkin.ai</span>
+          <span class="tag">OpenEvidence</span>
+        </div>
+      </div>
+
+      <div class="modulo-card">
+        <div class="modulo-num">Encontro 7</div>
+        <div class="modulo-data">01/06/2026</div>
+        <h3>Prática: Ferramentas CLI e Agentes de IA</h3>
+        <div class="modulo-tags">
+          <span class="tag">Claude Code</span>
+          <span class="tag">Gemini CLI</span>
+          <span class="tag">Terminal</span>
+        </div>
+      </div>
+
+      <div class="modulo-card">
+        <div class="modulo-num">Encontro 8</div>
+        <div class="modulo-data">08/06/2026</div>
+        <h3>Obsidian e Gestão do Conhecimento</h3>
+        <div class="modulo-tags">
+          <span class="tag">PKM</span>
+          <span class="tag">Zettelkasten</span>
+          <span class="tag">PARA</span>
+        </div>
+      </div>
+
+      <div class="modulo-card">
+        <div class="modulo-num">Encontro 9</div>
+        <div class="modulo-data">15/06/2026</div>
+        <h3>Ambientes Integrados: Obsidian + IA via CLI</h3>
+        <div class="modulo-tags">
+          <span class="tag">Pipeline</span>
+          <span class="tag">Automação</span>
+          <span class="tag">PubMed</span>
+        </div>
+      </div>
+
+      <div class="modulo-card">
+        <div class="modulo-num">Encontro 10</div>
+        <div class="modulo-data">22/06/2026</div>
+        <h3>Revisão de Literatura e Escrita Científica com IA</h3>
+        <div class="modulo-tags">
+          <span class="tag">Manuscrito</span>
+          <span class="tag">Busca Sistemática</span>
+        </div>
+      </div>
+
+      <div class="modulo-card">
+        <div class="modulo-num">Encontro 11</div>
+        <div class="modulo-data">29/06/2026</div>
+        <h3>Projetos Pessoais com IA e Encerramento</h3>
+        <div class="modulo-tags">
+          <span class="tag red">Projeto Integrador</span>
+          <span class="tag red">Certificação</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPE -->
+<section id="equipe">
+  <div class="container">
+    <div class="section-label">Equipe de Execução</div>
+    <div class="section-title">Coordenação do Curso</div>
+    <div class="equipe-grid">
+      <div class="pessoa-card">
+        <div class="avatar">AC</div>
+        <div class="cargo">Coordenadora</div>
+        <h3>Adriana da Fonte Porto Carreiro</h3>
+        <p>Docente do PPGCO/UFRN</p>
+        <p style="margin-top:10px; font-size:.8rem; color:#94a3b8;">adriana.carreiro@ufrn.br</p>
+      </div>
+      <div class="pessoa-card">
+        <div class="avatar">CD</div>
+        <div class="cargo">Coordenador Adjunto</div>
+        <h3>Ciro Dantas Soares</h3>
+        <p>Professor Visitante do PPGCO/UFRN</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NÚMEROS -->
+<section id="numeros">
+  <div class="container">
+    <div class="numeros-grid">
+      <div class="numero-item">
+        <div class="valor">48<span>h</span></div>
+        <div class="descricao">Carga horária total</div>
+      </div>
+      <div class="numero-item">
+        <div class="valor">11</div>
+        <div class="descricao">Encontros presenciais</div>
+      </div>
+      <div class="numero-item">
+        <div class="valor">40</div>
+        <div class="descricao">Participantes</div>
+      </div>
+      <div class="numero-item">
+        <div class="valor">20<span>+</span></div>
+        <div class="descricao">Ferramentas de IA</div>
+      </div>
+      <div class="numero-item">
+        <div class="valor">60<span>%</span></div>
+        <div class="descricao">Prática hands-on</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSCRIÇÃO -->
+<section id="inscricao">
+  <div class="container">
+    <div class="section-label">Participação</div>
+    <div class="section-title">Vagas Limitadas</div>
+    <p class="section-lead">20 vagas para discentes e docentes da UFRN e 20 vagas para participantes de outras instituições de ensino superior.</p>
+    <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:8px;">
+      <div class="info-box">📍 <strong>Local:</strong> Departamento de Odontologia · UFRN · Natal/RN</div>
+      <div class="info-box">📅 <strong>Período:</strong> 13/04 a 29/06/2026</div>
+      <div class="info-box">⏰ <strong>Horário:</strong> Segundas-feiras, 18h30–20h30</div>
+      <div class="info-box">✉️ <strong>Contato:</strong> adriana.carreiro@ufrn.br</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>PPGCO/UFRN</strong> · Programa de Pós-Graduação em Ciências Odontológicas</p>
+  <p style="margin-top:8px;">Departamento de Odontologia · Universidade Federal do Rio Grande do Norte · Natal/RN · Brasil</p>
+  <p style="margin-top:8px;">ODS 4 — Educação de Qualidade · ODS 9 — Inovação e Infraestrutura</p>
+</footer>
+
+</body>
+</html>
